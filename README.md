@@ -3,11 +3,11 @@
 ![](https://github.com/maxlethal/antiSMI-Bot/blob/master/img/bot_presentation.png?raw=true)
 
 ## Table of contents
-* About project
-* Project stats
-* Stack
-* Pipeline
-* Contact info
+* [About project](about-project)
+* [Project stats](project-stats)
+* [Stack](stack)
+* [Pipeline](pipeline)
+* [Contact info](contact-info)
 
 ## About project
 
