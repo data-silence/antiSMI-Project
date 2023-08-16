@@ -7,6 +7,7 @@
 * [About project](#about-project)
 * [Stack](#stack)
 * [Pipeline](#pipeline)
+* [Plans](#plans)
 * [Contact info](#contact-info)
 
 ## Stats
@@ -58,6 +59,20 @@ The project consists of three parts now:
 - **Interaction Interface**
     - pyTelegramBot [user interface]
     - SuperSet [analytics, dashboards]
+
+## Plans
+- **Common purpose**
+    - start public operation of the project 
+    - replicate the project for coverage on the news agenda in other countries
+- **Collector**
+    - increase source coverage: add parsing of English-language, Ukrainian and pro-state news agencies 
+- **Bot**
+    - audio digests
+    - training a neural network model for generating news photos
+- **Observer**
+    - deploy a remote Superset server
+    - increase dashboard coverage of news streams and agency structure
+    - write and publish an article based on the results of research and dashboards
 
 ## Contact info
 * maxlethal@protonmail.com
