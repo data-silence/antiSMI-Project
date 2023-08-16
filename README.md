@@ -3,11 +3,20 @@
 ![](https://github.com/maxlethal/antiSMI-Bot/blob/master/img/bot_presentation.png?raw=true)
 
 ## Table of contents
+* [Stats](#stats)
 * [About project](#about-project)
-* [Project stats](#project-stats)
 * [Stack](#stack)
 * [Pipeline](#pipeline)
 * [Contact info](#contact-info)
+
+## Stats
+
+***Purpose:** analytical news project based on machine learning
+* **Start:** 2022-07-01 [project suspended for 2 months in 2022]
+* **GitHub code:** [Collector](https://github.com/maxlethal/antiSMI-Collector), [Bot](https://github.com/maxlethal/antiSMI-Bot)  
+* **Capacity:** 40 news agencies, 500 news/day
+* **Bot database capacity:** > 100,000 news articles
+* **Disposable base capacity:** 1.5 million articles [08.1999 - 04.2019]
 
 ## About project
 
@@ -18,19 +27,11 @@ The project began with collecting and analyzing information about the partners o
 As a prototype for the realization of these ideas, a telegram bot with its analytical system was created and is being improved, which can be used as a personal news aggregator, a system for monitoring the information picture of the day, as well as a research tool for working with news archives.
 
 ![AntiSMI structure](https://github.com/maxlethal/antiSMI-Collector/blob/master/img/AntiSMI%20structure%20small.png?raw=true)
+
 The project consists of three parts now:
 *  [Collector](https://github.com/maxlethal/antiSMI-Collector) - collects and processes fresh agency news on a regular basis for use in the rest of the project 
 *  [Bot](https://github.com/maxlethal/antiSMI-Bot) - creates and sends personal smart news digest via telegram interface 
 * **Monitor** - researches social trends, make dashboards and creates NLP models
-
-
-## Project stats
-
-* **Start:** 2022-07-01 [project suspended for 2 months in 2022]
-* **GitHub:** [Collector](https://github.com/maxlethal/antiSMI-Collector), [Bot](https://github.com/maxlethal/antiSMI-Bot)  
-* **Capacity:** 40 news outlets, 500 news/day
-* **Bot database capacity:** > 100,000 news articles [07.2022 - 08.2023]
-* **Disposable base capacity:** 1.5 million articles [08.1999 - 04.2019]
 
 ## Stack
 
