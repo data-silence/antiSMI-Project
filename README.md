@@ -31,7 +31,7 @@ As a prototype for the realization of these ideas, a telegram bot with its analy
 The project consists of three parts now:
 *  [Collector](https://github.com/maxlethal/antiSMI-Collector) - collects and processes fresh agency news on a regular basis for use in the rest of the project 
 *  [Bot](https://github.com/maxlethal/antiSMI-Bot) - creates and sends personal smart news digest via telegram interface 
-* **Monitor** - researches social trends, make dashboards and creates NLP models
+* **Observer** - researches social trends, make dashboards and creates NLP models
 
 ## Stack
 
