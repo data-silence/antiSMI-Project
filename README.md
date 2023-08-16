@@ -15,8 +15,8 @@
 * **Start:** 2022-07-01 [project suspended for 2 months in 2022]
 * **GitHub code:** [Collector](https://github.com/maxlethal/antiSMI-Collector), [Bot](https://github.com/maxlethal/antiSMI-Bot)  
 * **Capacity:** 40 news agencies, 500 news/day
-* **Bot database capacity:** > 100,000 news articles
-* **Archive base capacity:** 1.5 million articles [08.1999 - 04.2019]
+* **Bot database capacity:** > 100,000 news articles [07.2022 - today]
+* **Archive base capacity:** > 1.5 million articles [08.1999 - 04.2019]
 
 ## About project
 
