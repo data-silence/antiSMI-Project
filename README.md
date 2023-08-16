@@ -11,7 +11,7 @@
 
 ## Stats
 
-***Purpose:** analytical news project based on machine learning
+* **Purpose:** analytical news project based on machine learning
 * **Start:** 2022-07-01 [project suspended for 2 months in 2022]
 * **GitHub code:** [Collector](https://github.com/maxlethal/antiSMI-Collector), [Bot](https://github.com/maxlethal/antiSMI-Bot)  
 * **Capacity:** 40 news agencies, 500 news/day
