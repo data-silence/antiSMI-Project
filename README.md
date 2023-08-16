@@ -7,6 +7,7 @@
 * [About project](#about-project)
 * [Stack](#stack)
 * [Pipeline](#pipeline)
+* [Development Tools](#development-tools)
 * [Plans](#plans)
 * [Contact info](#contact-info)
 
@@ -59,6 +60,14 @@ The project consists of three parts now:
 - **Interaction Interface**
     - pyTelegramBot [user interface]
     - SuperSet [analytics, dashboards]
+
+## Development Tools
+
+- Pycharm
+- Docker
+- GitHub
+- Linux shell
+
 
 ## Plans
 - **Common purpose**
