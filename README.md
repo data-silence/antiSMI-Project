@@ -16,7 +16,7 @@
 * **GitHub code:** [Collector](https://github.com/maxlethal/antiSMI-Collector), [Bot](https://github.com/maxlethal/antiSMI-Bot)  
 * **Capacity:** 40 news agencies, 500 news/day
 * **Bot database capacity:** > 100,000 news articles
-* **Disposable base capacity:** 1.5 million articles [08.1999 - 04.2019]
+* **Archive base capacity:** 1.5 million articles [08.1999 - 04.2019]
 
 ## About project
 
