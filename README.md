@@ -67,6 +67,7 @@ The project consists of three parts now:
 - **Collector**
     - increase source coverage: add parsing of English-language, Ukrainian and pro-state news agencies 
 - **Bot**
+    - expanded GUI as a one-page Web site
     - audio digests
     - training a neural network model for generating news photos
 - **Observer**
