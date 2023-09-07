@@ -85,5 +85,4 @@ The project consists of three parts now:
     - write and publish an article based on the results of research and dashboards
 
 ## Contact info
-* maxlethal@protonmail.com
-* i@max-science.pro
+* enjoy-ds@pm.me
