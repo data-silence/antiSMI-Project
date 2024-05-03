@@ -1,0 +1,71 @@
+version: '3'
+
+services:
+
+  db:
+    image: ankane/pgvector
+    container_name: pgvector
+    env_file:
+      - ./db/.env-db
+    volumes:
+      - asmi_vol:/var/lib/postgresql/data
+    networks:
+      - asmi_net
+    ports:
+      - "5432:5432"
+    restart: always
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready", "-U", "say_my_name" ]
+      interval: 3s
+      timeout: 3s
+      retries: 3
+
+
+  backend:
+    build:
+      context: ./backend/.
+    container_name: backend
+    networks:
+      - asmi_net
+    env_file:
+      - ./backend/.env-non-dev
+    expose:
+      - "8000"
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: [ "CMD", "curl", "--fail", "backend:8000" ]
+      interval: 120s
+      timeout: 3s
+      retries: 3
+
+
+  frontend:
+    build:
+      context: ./frontend/.
+    container_name: frontend
+    networks:
+      - asmi_net
+    expose:
+      - "8501"
+    ports:
+      - "8501:8501"
+    environment:
+      API_URL: http://backend:8000
+    depends_on:
+      db:
+        condition: service_healthy
+      backend:
+        condition: service_healthy
+
+
+volumes:
+  asmi_vol:
+    external: true
+
+
+networks:
+  asmi_net:
