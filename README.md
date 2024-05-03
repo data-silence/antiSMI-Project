@@ -33,7 +33,7 @@ You can use the applications of this project right now:
 [//]: # ()
 [//]: # (As a prototype for the realization of these ideas, a telegram bot with its analytical system was created and is being improved, which can be used as a personal news aggregator, a system for monitoring the information picture of the day, as well as a research tool for working with news archives.)
 
-![](https://github.com/data-silence/antiSMI-backend/blob/master/img/project.png?raw=true)
+![](https://github.com/data-silence/antiSMI-Project/blob/main/img/project.png?raw=true)
 
 
 The project consists of three parts now:
