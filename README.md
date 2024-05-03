@@ -1,18 +1,5 @@
 # antiSMI Project
 
-![](https://github.com/maxlethal/antiSMI-Bot/blob/master/img/bot_presentation.png?raw=true)
-
-![](https://github.com/data-silence/antiSMI-backend/blob/master/img/projectus_5.png?raw=true)
-
-![](https://github.com/data-silence/antiSMI-backend/blob/master/img/projectus_3.png?raw=true)
-
-![](https://github.com/data-silence/antiSMI-backend/blob/master/img/projectus_2.png?raw=true)
-
-![](https://github.com/data-silence/antiSMI-backend/blob/master/img/scheme_2.png?raw=true)
-
-![](https://github.com/data-silence/antiSMI-backend/blob/master/img/scheme.png?raw=true)
-
-![](https://github.com/data-silence/antiSMI-backend/blob/master/img/project.png?raw=true)
 
 ## Table of contents
 * [Stats](#stats)
@@ -36,11 +23,18 @@
 
 AntiSMI project is a personal analytical non-profit project at the intersection of ML and journalism, which allows using machine learning models to analyze changes in the news flow in real time, trying to create a fundamentally different way of consuming news in the conditions of changing the way of its production and in the conditions of misinformation.
 
-The project began with collecting and analyzing information about the partners of the Yandex-news service as of early summer 2022. 
+You can use the applications of this project right now:
+- Web-app (various tools to research the news flow)
+- Nowdays Bot (tools for working with current news)
+- Timemachine Bot (tools for working with past news)
 
-As a prototype for the realization of these ideas, a telegram bot with its analytical system was created and is being improved, which can be used as a personal news aggregator, a system for monitoring the information picture of the day, as well as a research tool for working with news archives.
+[//]: # (The project began with collecting and analyzing information about the partners of the Yandex-news service as of early summer 2022. )
 
-![AntiSMI structure](https://github.com/maxlethal/antiSMI-Collector/blob/master/img/AntiSMI%20structure%20small.png?raw=true)
+[//]: # ()
+[//]: # (As a prototype for the realization of these ideas, a telegram bot with its analytical system was created and is being improved, which can be used as a personal news aggregator, a system for monitoring the information picture of the day, as well as a research tool for working with news archives.)
+
+![](https://github.com/data-silence/antiSMI-backend/blob/master/img/projectus_5.png?raw=true)
+
 
 The project consists of three parts now:
 *  [Collector](https://github.com/maxlethal/antiSMI-Collector) - collects and processes fresh agency news on a regular basis for use in the rest of the project 
