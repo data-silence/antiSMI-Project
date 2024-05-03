@@ -2,6 +2,12 @@
 
 ![](https://github.com/maxlethal/antiSMI-Bot/blob/master/img/bot_presentation.png?raw=true)
 
+![](https://github.com/data-silence/antiSMI-backend/blob/master/img/projectus_5.png?raw=true)
+
+![](https://github.com/data-silence/antiSMI-backend/blob/master/img/projectus_3.png?raw=true)
+
+![](https://github.com/data-silence/antiSMI-backend/blob/master/img/projectus_2.png?raw=true)
+
 ![](https://github.com/data-silence/antiSMI-backend/blob/master/img/scheme_2.png?raw=true)
 
 ![](https://github.com/data-silence/antiSMI-backend/blob/master/img/scheme.png?raw=true)
