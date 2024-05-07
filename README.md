@@ -4,7 +4,7 @@
 ## Table of contents
 * [About project](#about-project)
 * [Stats](#stats)
-* [Project structure](#project-structure)
+* [Structure](#structure)
 * [Stack](#stack)
 * [Pipeline](#pipeline)
 * [Development Tools](#development-tools)
@@ -38,7 +38,7 @@ You can use the applications and opportunities of this project right now:
 
 
 
-## Project structure
+## Structure
 
 The project consists of independent parts that deal with news from the past and/or present time.
 
@@ -54,8 +54,6 @@ You can access the repositories you are interested in for more details by follow
 
 
 
-
-
 ## Stack
 
 * **Language:** python, sql 
@@ -63,6 +61,19 @@ You can access the repositories you are interested in for more details by follow
 * **Validation:** pydantic
 * **Logging:** loguru
 * **BI**: apache SuperSet
+
+
+## Self deploy
+
+It is possible to compose the main parts of the project (Database, Backend and Web-app) using the `docker-compose.yml` file, which is located in the root of this repository
+(you must have access to the files in steps 2-3).
+
+1. Clone the 2 repositories on your server side by side into the root of build directory using `git clone https://github.com/data-silence/antiSMI-backend` and `git clone https://github.com/data-silence/antiSMI-app`
+2. Create a `db` directory and copy `docker-compose.yml` into the root of build directory   
+3. Copy the file with the required environment variables for each part of the project `.env-non-dev` into the root of this part directory. Create directory `models` and copy the categorisation model file `cat_model.ftz` into it
+4. Make sure that docker is installed on the server. 
+5. Start building the project using `docker up -d`
+6. Your database starts on port 5432, your API on port 8000, and your web application on 8501
 
 
 ## Pipeline
