@@ -57,7 +57,7 @@ You can access the repositories you are interested in for more details by follow
 ## Stack
 
 * **Language:** python, sql 
-* **Databases:** postgreSQL + , sqlalchemy
+* **Databases:** postgreSQL + pgvector, sqlalchemy
 * **Validation:** pydantic
 * **Logging:** loguru
 * **BI**: apache SuperSet
