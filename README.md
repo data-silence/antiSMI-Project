@@ -6,6 +6,7 @@
 * [Stats](#stats)
 * [Structure](#structure)
 * [Stack](#stack)
+* [Self deploy](#self-deploy)
 * [Pipeline](#pipeline)
 * [Development Tools](#development-tools)
 * [Plans](#plans)
@@ -23,8 +24,8 @@ The project is currently based on Russian-language news, but has plans to cover 
 
 
 You can use the applications and opportunities of this project right now:
-- [Web-app](http://38.242.140.206:8501/) (various tools to research the news flow)
-- [Nowdays Bot](https://t.me/antiSMI_bot) (tools for working with current news)
+- [Web-app](http://news.data-silence.com) (various tools to research the news flow)
+- [Nowadays Bot](https://t.me/antiSMI_bot) (tools for working with current news)
 - [Timemachine Bot](https://t.me/time_mashine_bot) (tools for working with past news, temporarily out of service)
 
 
@@ -40,17 +41,27 @@ You can use the applications and opportunities of this project right now:
 
 ## Structure
 
-The project consists of independent parts that deal with news from the past and/or present time.
+The project consists of independent parts that deal with news from the past and/or present time that are in different repositories:
+* [Collector](https://github.com/data-silence/antiSMI-Collector)
+* [Parsers](https://github.com/data-silence/Media-Datasets-Parsers)
+* [Backend](https://github.com/data-silence/antiSMI-backend)
+* [Web-app](https://github.com/data-silence/antiSMI-app)
+* [Nowadays Bot](https://github.com/data-silence/antiSMI-Bot)
+* [Timemachine Bot](https://github.com/data-silence/timemachine)
 
-From a technical point of view, these parts can be grouped into 5 different groups, that are in different repositories and/or on different servers:
+From a technical point of view, these parts can be grouped into 5 different groups (see scheme):
 
-1.  **_Scrappers_** [[Collector](https://github.com/data-silence/antiSMI-Collector) and [Parsers](https://github.com/data-silence/Media-Datasets-Parsers)] - collects and processes agency news on a regular basis for use in the rest of the project 
+1.  **_Scrappers_** [Collector and Parsers] - collects and processes agency news on a regular basis for use in the rest of the project 
 2. **_Databases_** - relational and vector databases that store news collected and processed by Scrappers  
-3. [**_Backend_**](https://github.com/data-silence/antiSMI-backend) - FastAPI backend - retrieves various views of news articles stored in the project databases. The backend gets these views to the frontend of applications developed within the project. 
-4. **_Frontend_** [[Web-app](https://github.com/data-silence/antiSMI-app), [Nowdays Bot](https://github.com/data-silence/antiSMI-Bot) and [Timemachine Bot](https://github.com/data-silence/timemachine)] - these are different user interfaces for interacting with the project. Web-app - is the most versatile and comprehensive way, bots serve as a mobile way to interact with the current and past news stream. 
-5. **_Observer_** - researches social trends, make dashboards and creates NLP models. It is an ApacheSuperset based analytics system that connects to Databases and builds analytical dashboards and reports.
+3. **_Backend_** - FastAPI backend - retrieves various views of news articles stored in the project databases. The backend gets these views to the frontend of applications developed within the project. 
+4. **_Frontend_** [Web-app, Nowadays Bot and Timemachine Bot] - these are different user interfaces for interacting with the project. Web-app - is the most versatile and comprehensive way, bots serve as a mobile way to interact with the current and past news stream. 
+5. **_Observer_** [Superset Vizualizer] - researches social trends, make dashboards and creates NLP models. It is an ApacheSuperset based analytics system that connects to Databases and builds analytical dashboards and reports.
 
-You can access the repositories you are interested in for more details by following the links above. Databases and Observer  are closed parts of the project. This means that you will not be able to reproduce these project data using the source repositories, and docker / docker-compose files, but you will be able to learn and easily understand how to build a similar service yourself.   
+You can access the repositories you are interested in for more details by following the links below: 
+
+
+
+Databases and Observer  are closed parts of the project. This means that you will not be able to reproduce these project data using the source repositories, and docker / docker-compose files, but you will be able to learn and easily understand how to build a similar service yourself.   
 
 
 
@@ -103,11 +114,10 @@ It is possible to compose the main parts of the project (Database, Backend and W
 
 ## Plans
 - **Common purpose**
-    - start public operation of the project 
     - replicate the project for coverage on the news agenda in other countries
 - **Collector**
     - increase source coverage: add parsing of English-language, Ukrainian and pro-state news agencies 
-- **Bot**
+- **Frontend**
     - audio digests
     - training a neural network model for generating news photos
 - **Observer**
