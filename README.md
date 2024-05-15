@@ -55,7 +55,7 @@ From a technical point of view, these parts can be grouped into 5 different grou
 2. **_Databases_** - relational and vector databases that store news collected and processed by Scrappers  
 3. **_Backend_** - FastAPI backend - retrieves various views of news articles stored in the project databases. The backend gets these views to the frontend of applications developed within the project. 
 4. **_Frontend_** [Web-app, Nowadays Bot and Timemachine Bot] - these are different user interfaces for interacting with the project. Web-app - is the most versatile and comprehensive way, bots serve as a mobile way to interact with the current and past news stream. 
-5. **_Observer_** [Superset Vizualizer] - researches social trends, make dashboards and creates NLP models. It is an ApacheSuperset based analytics system that connects to Databases and builds analytical dashboards and reports.
+5. **_Observer_** [Superset Visualizer] - researches social trends, make dashboards and creates NLP models. It is an ApacheSuperset based analytics system that connects to Databases and builds analytical dashboards and reports.
 
 You can access the repositories you are interested in for more details by following the links below: 
 
@@ -91,9 +91,9 @@ It is possible to compose the main parts of the project (Database, Backend and W
 
 - **Scraping**
     - requests
-    - beatufill soup 4
+    - beautifulsoup4
 - **Summarization**
-    - mBart, Seq2Seq, pre-trained [news summary]
+    - mBart, Seq2Seq, pretrained [news summary]
     - ruT5, pre-trained [headline]
 - **Categorization**
     - fasttext, supervised pre-training, 7 classes (categories)
