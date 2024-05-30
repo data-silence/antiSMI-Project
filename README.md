@@ -87,7 +87,7 @@ It is possible to compose the main parts of the project (Database, Backend and W
 2. Create a `db` directory and copy `docker-compose.yml` into the root of build directory   
 3. Copy the file with the required environment variables for each part of the project `.env-non-dev` into the root of this part directory. Create directory `models` and copy the categorisation model file `cat_model.ftz` into it
 4. Make sure that docker is installed on the server. 
-5. Start building the project using `docker up -d`
+5. Start building the project using `docker compose up -d`
 6. Your database starts on port 5432, your API on port 8000, and your web application on 8501
 
 
