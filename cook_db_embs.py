@@ -1,9 +1,12 @@
+# !pip install asyncio asyncpg nest_asyncio
+# !pip install -U sentence-transformers
+
 import asyncio
 import asyncpg
 from datetime import datetime
 from sentence_transformers import SentenceTransformer
 
-model = SentenceTransformer('sentence-transformers/LaBSE')
+model = SentenceTransformer('sentence-transformers/LaBSE', device='cuda')
 
 
 def make_embs(sents: list[str]) -> list[str]:
