@@ -1,8 +1,12 @@
 # News Collector
 
-![Python](https://img.shields.io/badge/python-3.9-blue.svg)
-![License](https://img.shields.io/badge/license-MIT-green.svg)
-![Docker](https://img.shields.io/badge/docker-compatible-brightgreen.svg)
+![Python](https://img.shields.io/badge/python-3.12-blue.svg)
+![Docker](https://img.shields.io/badge/docker-compatible-blue.svg)
+![aiohttp](https://img.shields.io/badge/aiohttp-3.8.4-blue.svg)
+![asyncpg](https://img.shields.io/badge/asyncpg-0.27.0-blue.svg)
+![beautifulsoup4](https://img.shields.io/badge/beautifulsoup4-4.12.2-blue.svg)
+![pydantic](https://img.shields.io/badge/pydantic-1.10.7-blue.svg)
+![APScheduler](https://img.shields.io/badge/APScheduler-3.10.1-blue.svg)
 
 News Collector - это асинхронный скрипт на Python для сбора, обработки и хранения новостей из различных источников.
 
@@ -119,3 +123,7 @@ news-collector/
 
 Распространяется по лицензии MIT. Смотрите `LICENSE` для получения дополнительной информации.
 
+## Контакты
+
+✈️ [telegram](https://t.me/data_silence) 
+📬 [email](mailto:enjoy@data-silence.com)
