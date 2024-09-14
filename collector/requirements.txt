@@ -1,0 +1,8 @@
+aiohttp
+asyncpg
+beautifulsoup4
+loguru
+pydantic
+python-dotenv
+APScheduler
+lxml
