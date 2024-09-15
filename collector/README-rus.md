@@ -8,7 +8,7 @@
 ![pydantic](https://img.shields.io/badge/pydantic-1.10.7-blue.svg)
 ![APScheduler](https://img.shields.io/badge/APScheduler-3.10.1-blue.svg)
 
-News Collector - это асинхронный скрипт на Python для сбора, обработки и хранения новостей из различных источников.
+News Collector - это асинхронный скрипт на Python для сбора, обработки и хранения новостных телеграмм-каналов.
 
 ## Особенности
 
