@@ -3,11 +3,12 @@ import json
 from datetime import datetime
 from loguru import logger
 import os
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 
 from models.news_item import NewsItem
 
-load_dotenv()
+
+# load_dotenv()
 
 
 class DatabaseManager:
@@ -73,12 +74,8 @@ class DatabaseManager:
         processed_embedding = self.prepare_embedding(item.embedding)
         try:
             await conn.execute('''
-                INSERT INTO test_news (url, date, news, links, agency, title, resume, embedding, category)
+                INSERT INTO news_view (url, date, news, links, agency, title, resume, embedding, category)
                 VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
-                ON CONFLICT (url) DO UPDATE SET
-                date = EXCLUDED.date, news = EXCLUDED.news, links = EXCLUDED.links,
-                agency = EXCLUDED.agency, title = EXCLUDED.title, resume = EXCLUDED.resume,
-                embedding = EXCLUDED.embedding, category = EXCLUDED.category
             ''', item.url, processed_dt, item.news, item.links,
                                item.agency, item.title, item.resume, processed_embedding, item.category)
             return True

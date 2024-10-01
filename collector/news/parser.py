@@ -1,5 +1,6 @@
 import aiohttp
 import asyncio
+import re
 from bs4 import BeautifulSoup
 from datetime import datetime
 from typing import Optional
@@ -26,10 +27,11 @@ class NewsParser:
         Извлекает ссылку из HTML-тега или возвращает исходный URL.
         Extracts link from HTML tag or returns the original URL.
         """
+        pattern = r"^https://t\.me/[\w\d_]+/\d+$"
         if not tag_a:
             return url
         href = tag_a.get('href')
-        if href.startswith(('tg://resolve?domain=', 'https://t.me/+')):
+        if href.startswith(('tg://resolve?domain=', 'https://t.me')):
             return url
         links = href.split('?utm')[0]
         links = links.split('?')[0] if not links.startswith('https://www.youtube.com/watch') else links
@@ -47,7 +49,7 @@ class NewsParser:
         url = news_content.find(attrs={'class': 'tgme_widget_message_date'}).get('href')
         date = datetime.fromisoformat(news_content.find(attrs={'class': 'time'}).get('datetime'))
         tag_a = dirty_news.find('a')
-        links = self.extract_link(tag_a, url)
+        links = [self.extract_link(tag_a, url)]
 
         news = dirty_news.text
         if agency == 'briefsmi':
@@ -72,9 +74,12 @@ class NewsParser:
         async with aiohttp.ClientSession() as session:
             html = await self.fetch(session, agency_url)
             soup = BeautifulSoup(html, 'lxml')
-            news_pages = soup.body.main.section.find_all(attrs={'class': 'tgme_widget_message_bubble'})
-            last_news_pages = [page for page in news_pages if int(
-                page.find(attrs={'class': 'tgme_widget_message_date'}).get('href').split('/')[-1]) > last_id]
+            try:
+                news_pages = soup.body.main.section.find_all(attrs={'class': 'tgme_widget_message_bubble'})
+                last_news_pages = [page for page in news_pages if int(
+                    page.find(attrs={'class': 'tgme_widget_message_date'}).get('href').split('/')[-1]) > last_id]
 
-            tasks = [self.process_news_content(news_content, agency) for news_content in last_news_pages]
-            return [item for item in await asyncio.gather(*tasks) if item]
+                tasks = [self.process_news_content(news_content, agency) for news_content in last_news_pages]
+                return [item for item in await asyncio.gather(*tasks) if item]
+            except AttributeError:
+                return []

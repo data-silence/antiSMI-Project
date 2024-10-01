@@ -3,7 +3,7 @@ from typing import Any
 
 
 class NewsAPIClient:
-    def __init__(self, base_url: str = "http://127.0.0.1:8000"):
+    def __init__(self, base_url: str = "http://host.docker.internal:8000"):  # http://127.0.0.1:8000
         self.base_url = base_url
 
     async def fetch_news_without_embeddings(self) -> dict[str, Any]:
@@ -49,7 +49,7 @@ class NewsAPIClient:
         timeout = aiohttp.ClientTimeout(total=36000)
         async with aiohttp.ClientSession(timeout=timeout) as session:
             async with session.post(f"{self.base_url}/models/get_category", json=news) as response:
-                return await response.json
+                return await response.json()
 
     async def generate_resumes(self, news: list[str]) -> list[str]:
         """

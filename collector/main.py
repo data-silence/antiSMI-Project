@@ -42,7 +42,7 @@ def main():
     Main function to start the news collection process on schedule.
     """
     scheduler = AsyncIOScheduler()
-    scheduler.add_job(process_news, 'interval', hours=1)
+    scheduler.add_job(process_news, 'cron', minute=0)
     scheduler.start()
 
     try:
@@ -52,4 +52,6 @@ def main():
 
 
 if __name__ == '__main__':
+    asyncio.run(process_news())
+    asyncio.set_event_loop(asyncio.new_event_loop())
     main()

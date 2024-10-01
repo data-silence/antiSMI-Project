@@ -4,6 +4,7 @@ from loguru import logger
 from models.news_item import NewsItem
 from news.parser import NewsParser
 from api.client import NewsAPIClient
+import pickle
 
 
 class NewsProcessor:
@@ -19,11 +20,12 @@ class NewsProcessor:
         all_news = {}
         for agency, last_id in agencies.items():
             logger.info(f'Начинается обработка {agency}')
-            logger.info(f'Starting processing for {agency}')
+            # logger.info(f'Starting processing for {agency}')
             news_items = await self.parser.parse_agency(agency, last_id)
             if news_items:
                 all_news[agency] = news_items
                 await self.enrich_news_items(news_items)
+
         return all_news
 
     async def enrich_news_items(self, news_items: list[NewsItem]):
@@ -49,5 +51,5 @@ class NewsProcessor:
             item.title = headlines[i]
 
         logger.info(f'Собрано {len(news_items)} новостей')
-        logger.info(f'Collected {len(news_items)} news items')
+        # logger.info(f'Collected {len(news_items)} news items')
         return news_items

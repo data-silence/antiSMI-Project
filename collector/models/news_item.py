@@ -6,7 +6,7 @@ class NewsItem(BaseModel):
     url: str
     date: datetime
     news: str
-    links: str
+    links: list = []
     agency: str
     title: str = ""
     resume: str = ""
