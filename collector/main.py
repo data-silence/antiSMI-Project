@@ -32,8 +32,10 @@ async def process_news():
         await db_manager.insert_news_items(fresh_news)
 
     end_date = datetime.now()
-    logger.info(f'Время выполнения: {round((end_date - start_date).total_seconds() / 60, 2)} минут')
-    # logger.info(f'Execution time: {round((end_date - start_date).total_seconds() / 60, 2)} minutes')
+    seconds = (end_date - start_date).total_seconds()
+    logger.info(f'Время выполнения: {(seconds / 60):.2f} минут')
+    # logger.info(f'Execution time: {(seconds / 60):.2f}  minutes')
+    logger.info(f'Средняя скорость обработки одной новости: {(seconds / (len(fresh_news))):.2f} секунд')
 
 
 def main():

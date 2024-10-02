@@ -18,8 +18,8 @@ class NewsProcessor:
         Processes news for all agencies.
         """
         all_news = {}
-        for agency, last_id in agencies.items():
-            logger.info(f'Начинается обработка {agency}')
+        for i, (agency, last_id) in enumerate(agencies.items()):
+            logger.info(f'Начинается обработка [{(i+1)}/{len(agencies)}] {agency}')
             # logger.info(f'Starting processing for {agency}')
             news_items = await self.parser.parse_agency(agency, last_id)
             if news_items:

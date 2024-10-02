@@ -3,12 +3,8 @@ import json
 from datetime import datetime
 from loguru import logger
 import os
-# from dotenv import load_dotenv
 
 from models.news_item import NewsItem
-
-
-# load_dotenv()
 
 
 class DatabaseManager:
