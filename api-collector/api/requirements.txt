@@ -1,0 +1,17 @@
+fastapi
+SQLAlchemy
+loguru
+wordcloud
+pymorphy3
+stop-words
+torch
+transformers
+pgvector
+emoji
+pydantic-settings
+uvicorn
+gunicorn[uvicorn]
+asyncpg
+protobuf
+sentencepiece
+pandas

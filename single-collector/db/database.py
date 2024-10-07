@@ -27,20 +27,20 @@ class DatabaseManager:
 
     async def get_last_agencies_dict(self) -> dict[str, int]:
         """
-        Получает словарь с последними новостями для каждого агентства.
-        Retrieves a dictionary with the latest news for each agency.
+        Получает словарь с последними id новостей для каждого агентства (для новых агенств id = 0).
+        Retrieves a dictionary with the latest news_id for each agency (id for new agencies = 0)
         """
         async with self.pool.acquire() as conn:
             query = """
-            SELECT t1.agency, SPLIT_PART(n.url, '/', -1)
-            FROM
-            (SELECT telegram AS agency, MAX(date) AS date
-            FROM news n
-            JOIN agencies a ON a.id = n.agency_id
-            WHERE date > (SELECT NOW() - INTERVAL '1 month')
-            GROUP BY telegram) t1
-            JOIN news n 
-            ON n.date = t1.date
+        SELECT t1.agency, 
+               COALESCE(SPLIT_PART(n.url, '/', -1), '0') AS last_news_id
+        FROM
+            (SELECT a.telegram AS agency, MAX(n.date) AS date
+             FROM agencies a
+             LEFT JOIN news n ON a.id = n.agency_id
+             WHERE a.is_parsing is True
+             GROUP BY a.telegram) t1
+        LEFT JOIN news n ON n.date = t1.date AND n.agency_id = (SELECT id FROM agencies WHERE telegram = t1.agency)
             """
             result = await conn.fetch(query)
             return {agency: int(last_url_number) for agency, last_url_number in result}
