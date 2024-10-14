@@ -7,11 +7,11 @@ services:
     env_file:
       - api/.env-non-dev
     ports:
-      - "8001:8001"
+      - "8002:8002"
     networks:
       - api_net
     healthcheck:
-      test: [ "CMD", "curl", "--fail", "api:8001" ]
+      test: [ "CMD", "curl", "--fail", "api:8002" ]
       interval: 360s
       timeout: 3s
       retries: 3

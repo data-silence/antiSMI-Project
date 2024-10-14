@@ -4,8 +4,7 @@ loguru
 wordcloud
 pymorphy3
 stop-words
-torch
-transformers
+transformers[torch]<4.43
 pgvector
 emoji
 pydantic-settings
@@ -15,3 +14,5 @@ asyncpg
 protobuf
 sentencepiece
 pandas
+#torch
+#transformers<4.43

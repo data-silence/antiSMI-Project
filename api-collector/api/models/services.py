@@ -23,25 +23,32 @@ class NewsItem(BaseModel):
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-# Для модели эмбеддингов
-embedding_model_name = "sentence-transformers/LaBSE"
-embedding_tokenizer = AutoTokenizer.from_pretrained(embedding_model_name)
-embedding_model = AutoModel.from_pretrained(embedding_model_name).to(device)
+def get_classifier_model():
+    model_name = "data-silence/any-news-classifier"
+    tokenizer = AutoTokenizer.from_pretrained(model_name)
+    model = AutoModelForSequenceClassification.from_pretrained(model_name).to(device)
+    return CategoryModel(model=model, tokenizer=tokenizer, device=device, id2label=id2label)
 
-# Для модели категорий
-category_model_name = "data-silence/any-news-classifier"
-category_tokenizer = AutoTokenizer.from_pretrained(category_model_name)
-category_model = AutoModelForSequenceClassification.from_pretrained(category_model_name).to(device)
+def get_embedding_model():
+    model_name = "sentence-transformers/LaBSE"
+    tokenizer = AutoTokenizer.from_pretrained(model_name)
+    model = AutoModel.from_pretrained(model_name).to(device)
+    return EmbeddingModel(model=model, tokenizer=tokenizer, device=device)
 
-# Для модели генерации заголовков
-headline_model_name = "IlyaGusev/rut5_base_headline_gen_telegram"
-headline_tokenizer = AutoTokenizer.from_pretrained(headline_model_name)
-headline_model = AutoModelForSeq2SeqLM.from_pretrained(headline_model_name).to(device)
 
-# Для модели суммаризации
-summary_model_name = "IlyaGusev/mbart_ru_sum_gazeta"
-summary_tokenizer = AutoTokenizer.from_pretrained(summary_model_name)
-summary_model = AutoModelForSeq2SeqLM.from_pretrained(summary_model_name).to(device)
+def get_headline_model():
+    model_name = "IlyaGusev/rut5_base_headline_gen_telegram"
+    tokenizer = AutoTokenizer.from_pretrained(model_name)
+    model = AutoModelForSeq2SeqLM.from_pretrained(model_name).to(device)
+    return HeadlineModel(model=model, tokenizer=tokenizer, device=device)
+
+def get_summary_model():
+    model_name = "IlyaGusev/mbart_ru_sum_gazeta"
+    tokenizer = AutoTokenizer.from_pretrained(model_name)
+    model = AutoModelForSeq2SeqLM.from_pretrained(model_name).to(device)
+    return SummaryModel(model=model, tokenizer=tokenizer, device=device)
+
+
 
 class ModelInterface:
     def __init__(self, model, tokenizer, device):
@@ -77,22 +84,22 @@ class CategoryModel(ModelInterface):
 
 class HeadlineModel(ModelInterface):
     async def process(self, texts: List[str]) -> List[str]:
-        try:
-            inputs = self.tokenizer(
-                texts,
+        titles = []
+        for text in texts:
+            input_ids = self.tokenizer(
+                [text],
                 max_length=600,
                 add_special_tokens=True,
                 padding="max_length",
                 truncation=True,
                 return_tensors="pt"
-            ).to(self.device)
+            )["input_ids"].to(self.device)
 
-            with torch.no_grad():
-                output_ids = self.model.generate(input_ids=inputs["input_ids"])
 
-            return [self.tokenizer.decode(output, skip_special_tokens=True) for output in output_ids]
-        except Exception as e:
-            raise e
+            output_ids = self.model.generate(input_ids=input_ids)[0]
+            headline = self.tokenizer.decode(output_ids, skip_special_tokens=True)
+            titles.append(headline)
+        return titles
 
 class SummaryModel(ModelInterface):
     async def process(self, texts: List[str]) -> List[str]:
@@ -116,7 +123,7 @@ class SummaryModel(ModelInterface):
         return summaries
 
 # Инициализация моделей
-embedder = EmbeddingModel(embedding_model, embedding_tokenizer, device)
-categorizer = CategoryModel(category_model, category_tokenizer, device, id2label)
-headliner = HeadlineModel(headline_model, headline_tokenizer, device)
-summarizer = SummaryModel(summary_model, summary_tokenizer, device)
+# embedder = EmbeddingModel(embedding_model, embedding_tokenizer, device)
+# categorizer = CategoryModel(category_model, category_tokenizer, device, id2label)
+# headliner = HeadlineModel(headline_model, headline_tokenizer, device)
+# summarizer = SummaryModel(summary_model, summary_tokenizer, device)

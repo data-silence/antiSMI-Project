@@ -85,6 +85,12 @@ class DatabaseManager:
         Вставляет или обновляет набор новостей.
         Inserts or updates a set of news items.
         """
+        # Проверяем, поступили ли новости
+        if not news_items or all(len(items) == 0 for items in news_items.values()):
+            logger.warning("Не поступило новостей для вставки.")
+            # logger.warning("No news items to insert.")
+            return
+
         total_count = sum(len(items) for items in news_items.values())
         success_count = 0
         fail_count = 0

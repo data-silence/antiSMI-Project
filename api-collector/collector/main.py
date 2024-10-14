@@ -31,11 +31,15 @@ async def process_news():
     async with DatabaseManager() as db_manager:
         await db_manager.insert_news_items(fresh_news)
 
-    end_date = datetime.now()
-    seconds = (end_date - start_date).total_seconds()
-    logger.info(f'Время выполнения: {(seconds / 60):.2f} минут')
-    # logger.info(f'Execution time: {(seconds / 60):.2f}  minutes')
-    logger.info(f'Средняя скорость обработки одной новости: {(seconds / (len(fresh_news))):.2f} секунд')
+    if not fresh_news:
+        logger.warning('Не было получено новостей')
+    else:
+        end_date = datetime.now()
+        total_seconds = (end_date - start_date).total_seconds()
+        minutes, seconds = divmod(total_seconds, 60)
+        logger.info(f'Время выполнения {int(minutes)} минут и {int(seconds)} секунд')
+        # logger.info(f'Execution time: {(seconds / 60):.2f}  minutes')
+        logger.info(f'Средняя скорость обработки одной новости: {total_seconds / (len(fresh_news))}:.2f секунд')
 
 
 def main():

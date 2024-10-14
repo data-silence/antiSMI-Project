@@ -1,9 +1,9 @@
-from fastapi import APIRouter, Query
+from fastapi import APIRouter, Query, Depends
 
 from api.news.time_manager import NewsTimeManager, ServiceMode
 from api.news.dao import NewsDao
 from api.news.schemas import BackendViewSchema, ServiceModeEnum
-from api.models.services import embedder
+from api.models.services import get_embedding_model
 
 import pandas as pd
 from datetime import datetime
@@ -46,7 +46,7 @@ async def get_user_df(
 
 
 @router.get('/find_similar')
-async def find_similar_news(query: str, limit: int = 100) -> list[BackendViewSchema]:
+async def find_similar_news(query: str, limit: int = 100, embedder=Depends(get_embedding_model)) -> list[BackendViewSchema]:
     """Handler to fetch most simular news to transferable query over a period of time"""
     embedding = embedder.get_embeddings(texts=[query])[0]
     return await NewsDao.search_similar_embeddings(embedding=embedding, limit=limit)

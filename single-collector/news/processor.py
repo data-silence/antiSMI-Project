@@ -8,9 +8,8 @@ import pickle
 
 
 class NewsProcessor:
-    def __init__(self, parser: NewsParser, api_client: NewsAPIClient):
+    def __init__(self, parser: NewsParser):
         self.parser = parser
-        self.api_client = api_client
 
     async def process_agencies(self, agencies: dict[str, int]) -> dict[str, list[NewsItem]]:
         """
@@ -35,20 +34,30 @@ class NewsProcessor:
         """
         texts = [item.news for item in news_items]
 
-        embeddings_task = self.api_client.generate_embs(texts)
-        categories_task = self.api_client.get_category(texts)
-        resumes_task = self.api_client.generate_resumes(texts)
-        headlines_task = self.api_client.generate_headlines(texts)
+        embeddings_task = self.parser.api_client.generate_embs(texts)
+        categories_task = self.parser.api_client.get_category(texts)
+        resumes_task = self.parser.api_client.generate_resumes(texts)
+        headlines_task = self.parser.api_client.generate_headlines(texts)
 
         embeddings, categories, resumes, headlines = await asyncio.gather(
             embeddings_task, categories_task, resumes_task, headlines_task
         )
+
+        # embeddings, categories = await asyncio.gather(
+        #     embeddings_task, categories_task
+        # )
 
         for i, item in enumerate(news_items):
             item.embedding = embeddings[i]
             item.category = categories[i]
             item.resume = resumes[i]
             item.title = headlines[i]
+            # item_resume = await self.parser.api_client.generate_resumes(texts[i])
+            # item_title = await self.parser.api_client.generate_headlines(texts[i])
+            # logger.info(f'{item_resume=}, {item_title=}')
+            # item.resume = item_resume
+            # item.title = item_title
+
 
         logger.info(f'Собрано {len(news_items)} новостей')
         # logger.info(f'Collected {len(news_items)} news items')

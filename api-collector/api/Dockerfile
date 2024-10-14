@@ -22,4 +22,4 @@ COPY . ./api/.
 LABEL authors="data-silence"
 
 # Команда для запуска приложения
-CMD ["gunicorn", "-w", "2", "-k", "uvicorn.workers.UvicornWorker", "api.main:app", "--bind", "0.0.0.0:8001", "--timeout", "300"]
+CMD ["gunicorn", "-w", "2", "-k", "uvicorn.workers.UvicornWorker", "api.main:app", "--bind", "0.0.0.0:8002", "--timeout", "300"]

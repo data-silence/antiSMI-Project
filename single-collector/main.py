@@ -23,19 +23,20 @@ async def process_news():
         logger.info('Получен статус последних новостей в базе данных')
         # logger.info('Retrieved status of latest news in the database')
 
-    api_client = NewsAPIClient()
-    parser = NewsParser(api_client)
-    processor = NewsProcessor(parser, api_client)
-    fresh_news = await processor.process_agencies(agencies_dict)
+    async with NewsAPIClient() as api_client:
+        parser = NewsParser(api_client)
+        processor = NewsProcessor(parser)
+        fresh_news = await processor.process_agencies(agencies_dict)
 
     async with DatabaseManager() as db_manager:
         await db_manager.insert_news_items(fresh_news)
 
     end_date = datetime.now()
-    seconds = (end_date - start_date).total_seconds()
-    logger.info(f'Время выполнения: {(seconds / 60):.2f} минут')
+    minutes, seconds = divmod((end_date - start_date).total_seconds(), 60)
+    logger.info(f'Время выполнения {int(minutes)} минут и {int(seconds)} секунд')
     # logger.info(f'Execution time: {(seconds / 60):.2f}  minutes')
     logger.info(f'Средняя скорость обработки одной новости: {(seconds / (len(fresh_news))):.2f} секунд')
+
 
 
 def main():
@@ -57,3 +58,4 @@ if __name__ == '__main__':
     asyncio.run(process_news())
     asyncio.set_event_loop(asyncio.new_event_loop())
     main()
+    # asyncio.run(test_work())
