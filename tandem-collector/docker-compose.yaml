@@ -1,0 +1,6 @@
+services:
+  news_collector:
+    build: .
+    env_file:
+      - .env
+    restart: always

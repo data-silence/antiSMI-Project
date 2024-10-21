@@ -65,7 +65,7 @@ class NewsAPIClient:
         Генерирует резюме для списка новостей.
         Generates summaries for a list of news.
         """
-        result = get_summary_model(news)
+        result = get_summary_model().process(news)
         return result
 
     def generate_headlines(self, news: list[str]) -> list[str]:
@@ -73,5 +73,5 @@ class NewsAPIClient:
         Генерирует заголовки для списка новостей.
         Generates headlines for a list of news.
         """
-        result = get_headline_model(news)
+        result = get_headline_model().process(news)
         return result

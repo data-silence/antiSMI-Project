@@ -1,0 +1,14 @@
+/api/migrations/
+alembic.ini
+/.venv/
+.idea
+/.idea/
+.env
+.env-non-dev
+.env-db
+/venv/
+/models/cat_model.ftz
+/tmp/
+/api_using/
+api_using
+/api/.env-non-dev

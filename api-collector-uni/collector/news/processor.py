@@ -36,29 +36,18 @@ class NewsProcessor:
 
         embeddings_task = self.parser.api_client.generate_embs(texts)
         categories_task = self.parser.api_client.get_category(texts)
+        resumes_task = self.parser.api_client.generate_resumes(texts)
+        headlines_task = self.parser.api_client.generate_headlines(texts)
 
-        # embeddings, categories, resumes, headlines = await asyncio.gather(
-        #     embeddings_task, categories_task, resumes_task, headlines_task
-        # )
-
-        embeddings, categories = await asyncio.gather(
-            embeddings_task, categories_task
+        embeddings, categories, resumes, headlines = await asyncio.gather(
+            embeddings_task, categories_task, resumes_task, headlines_task
         )
-
-        # resumes_task = self.parser.api_client.generate_resumes(texts)
-        # headlines_task = self.parser.api_client.generate_headlines(texts)
 
         for i, item in enumerate(news_items):
             item.embedding = embeddings[i]
             item.category = categories[i]
-            # item.resume = resumes[i]
-            # item.title = headlines[i]
-            item.resume = self.parser.api_client.generate_resumes(texts[i])
-            item.title = self.parser.api_client.generate_headlines(texts[i])
-            logger.info(f'{item.resume=}, {item.title=}')
-            # item.resume = item_resume
-            # item.title = item_title
-
+            item.resume = resumes[i]
+            item.title = headlines[i]
 
         logger.info(f'Собрано {len(news_items)} новостей')
         # logger.info(f'Collected {len(news_items)} news items')

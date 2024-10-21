@@ -1,0 +1,10 @@
+aiohttp
+asyncpg
+beautifulsoup4
+loguru
+pydantic
+APScheduler
+lxml
+transformers[torch]<4.43
+protobuf
+sentencepiece

@@ -1,0 +1,7 @@
+/.venv/
+/.idea/
+/.git/
+.env*
+.env-non-dev*
+.gitignore*
+README*

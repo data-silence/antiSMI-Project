@@ -18,7 +18,7 @@ class NewsProcessor:
         """
         all_news = {}
         for i, (agency, last_id) in enumerate(agencies.items()):
-            logger.info(f'Начинается обработка [{(i+1)}/{len(agencies)}] {agency}')
+            logger.info(f'Начинается обработка [{(i + 1)}/{len(agencies)}] {agency}')
             # logger.info(f'Starting processing for {agency}')
             news_items = await self.parser.parse_agency(agency, last_id)
             if news_items:
@@ -37,28 +37,15 @@ class NewsProcessor:
         embeddings_task = self.parser.api_client.generate_embs(texts)
         categories_task = self.parser.api_client.get_category(texts)
 
-        # embeddings, categories, resumes, headlines = await asyncio.gather(
-        #     embeddings_task, categories_task, resumes_task, headlines_task
-        # )
-
         embeddings, categories = await asyncio.gather(
             embeddings_task, categories_task
         )
 
-        # resumes_task = self.parser.api_client.generate_resumes(texts)
-        # headlines_task = self.parser.api_client.generate_headlines(texts)
-
         for i, item in enumerate(news_items):
             item.embedding = embeddings[i]
             item.category = categories[i]
-            # item.resume = resumes[i]
-            # item.title = headlines[i]
-            item.resume = self.parser.api_client.generate_resumes(texts[i])
-            item.title = self.parser.api_client.generate_headlines(texts[i])
-            logger.info(f'{item.resume=}, {item.title=}')
-            # item.resume = item_resume
-            # item.title = item_title
-
+            item.resume = self.parser.api_client.generate_resumes([texts[i]])[0]
+            item.title = self.parser.api_client.generate_headlines([texts[i]])[0]
 
         logger.info(f'Собрано {len(news_items)} новостей')
         # logger.info(f'Collected {len(news_items)} news items')

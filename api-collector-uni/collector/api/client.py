@@ -1,7 +1,6 @@
 import aiohttp
 from typing import Any
 import os
-from api.services import get_headline_model, get_summary_model
 
 API_URL = os.getenv("API")
 
@@ -60,18 +59,20 @@ class NewsAPIClient:
         async with self.session.post(f"{self.base_url}/models/get_category", json=news) as response:
             return await response.json()
 
-    def generate_resumes(self, news: list[str]) -> list[str]:
+    async def generate_resumes(self, news: list[str]) -> list[str]:
         """
         Генерирует резюме для списка новостей.
         Generates summaries for a list of news.
         """
-        result = get_summary_model(news)
-        return result
+        async with self.session.post(f"{self.base_url}/models/generate_resumes", json=news) as response:
+            result = await response.json()
+            return result
 
-    def generate_headlines(self, news: list[str]) -> list[str]:
+    async def generate_headlines(self, news: list[str]) -> list[str]:
         """
         Генерирует заголовки для списка новостей.
         Generates headlines for a list of news.
         """
-        result = get_headline_model(news)
-        return result
+        async with self.session.post(f"{self.base_url}/models/generate_headlines", json=news) as response:
+            result = await response.json()
+            return result
