@@ -40,16 +40,15 @@ class NewsParser:
 
     @staticmethod
     def transform_timezone(date, mode = 'utc'):
-
+        db_date = date
         match mode:
             case 'utc':
-                # Указание часового пояса (UTC)
-                utc = pytz.utc
-                db_date = date.replace(tzinfo=utc)
+                db_date = date.replace(tzinfo=None)
             case 'msk':
                 # Преобразование в московское время
                 moscow_tz = pytz.timezone('Europe/Moscow')
-                db_date = date.replace(tzinfo=moscow_tz)
+                date_moscow = date.astimezone(moscow_tz)
+                db_date = date_moscow.replace(tzinfo=None)
         return db_date
 
 
