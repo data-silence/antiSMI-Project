@@ -8,3 +8,4 @@ lxml
 transformers[torch]<4.43
 protobuf
 sentencepiece
+fasttext-wheel

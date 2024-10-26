@@ -2,5 +2,5 @@ services:
   news_collector:
     build: .
     env_file:
-      - .env
+        - .env
     restart: always

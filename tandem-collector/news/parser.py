@@ -8,6 +8,7 @@ import pytz
 from models.news_item import NewsItem
 from api.client import NewsAPIClient
 
+
 class NewsParser:
     def __init__(self, api_client: NewsAPIClient):
         self.api_client = api_client
@@ -37,9 +38,8 @@ class NewsParser:
         links = links.split('?')[0] if not links.startswith('https://www.youtube.com/watch') else links
         return links if links and links != '' else url
 
-
     @staticmethod
-    def transform_timezone(date, mode = 'utc'):
+    def transform_timezone(date, mode='utc'):
         db_date = date
         match mode:
             case 'utc':
@@ -50,7 +50,6 @@ class NewsParser:
                 date_moscow = date.astimezone(moscow_tz)
                 db_date = date_moscow.replace(tzinfo=None)
         return db_date
-
 
     async def process_news_content(self, news_content: BeautifulSoup, agency: str) -> Optional[NewsItem]:
         """
@@ -72,7 +71,6 @@ class NewsParser:
             news = news.split(': ')[-1].split('#')[0]
 
         news = await self.api_client.clean_text(news, agency)
-        print(url, date, news)
 
         return NewsItem(
             url=url,

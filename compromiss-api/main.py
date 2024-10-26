@@ -21,27 +21,21 @@ async def process_news():
         # Get the latest dictionary of news agencies
         agencies_dict = await db_manager.get_last_agencies_dict()
         logger.info('Получен статус последних новостей в базе данных')
+        # logger.info('Retrieved status of latest news in the database')
 
     async with NewsAPIClient() as api_client:
         parser = NewsParser(api_client)
         processor = NewsProcessor(parser)
-        fresh_news, fresh_old_news = await processor.process_agencies(agencies_dict)
+        fresh_news = await processor.process_agencies(agencies_dict)
 
-    if not fresh_news:
-        logger.warning('Не было получено новостей')
-    else:
-        async with DatabaseManager() as db_manager:
-            # Запись в новую базу данных
-            total_count = await db_manager.insert_news_items(fresh_news)
-            # Запись в старую базу данных
-            total_old_count = await db_manager.insert_old_news_items(fresh_old_news)
+    async with DatabaseManager() as db_manager:
+        await db_manager.insert_news_items(fresh_news)
 
-        end_date = datetime.now()
-        total_seconds = (end_date - start_date).total_seconds()
-        minutes, seconds = divmod(total_seconds, 60)
-        logger.info(f'Время выполнения {int(minutes)} минут и {int(seconds)} секунд')
-        total_news = total_count + total_old_count
-        logger.info(f'Средняя скорость обработки одной новости: {(total_seconds / total_news):.2f} секунд')
+    end_date = datetime.now()
+    seconds = (end_date - start_date).total_seconds()
+    logger.info(f'Время выполнения: {(seconds / 60):.2f} минут')
+    # logger.info(f'Execution time: {(seconds / 60):.2f}  minutes')
+    logger.info(f'Средняя скорость обработки одной новости: {(seconds / (len(fresh_news))):.2f} секунд')
 
 
 def main():
@@ -61,6 +55,5 @@ def main():
 
 if __name__ == '__main__':
     asyncio.run(process_news())
-    # Раскомментировать для запуска по расписанию
     asyncio.set_event_loop(asyncio.new_event_loop())
     main()
