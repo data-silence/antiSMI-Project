@@ -1,0 +1,35 @@
+services:
+  api:
+    build:
+      context: api/.
+    image: maxlethal/api
+    container_name: api
+    env_file:
+      - api/.env-non-dev
+    ports:
+      - "8001:8001"
+    networks:
+      - api_net
+    healthcheck:
+      test: [ "CMD", "curl", "--fail", "api:8001" ]
+      interval: 3600s
+      timeout: 3s
+      retries: 3
+    restart: always
+
+  collector:
+    build:
+      context: collector/.
+    image: maxlethal/news-collector
+    container_name: collector
+    networks:
+      - api_net
+    env_file:
+      - ./collector/.env-non-dev
+    depends_on:
+      api:
+        condition: service_healthy
+    restart: always
+
+networks:
+  api_net:
